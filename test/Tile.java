@@ -1,4 +1,4 @@
-//package test;
+package test;
 
 public class Tile {
 
@@ -15,13 +15,14 @@ public class Tile {
         return this.letter == other.letter && this.score == other.score;
     }
 
-    // public hashCode(){
-
-    // }
+    public int hashCode() {
+        return this.letter + this.score;
+    }
 
     public static class Bag {
         int amountArr[] = new int[26];
         Tile tileArr[] = new Tile[26];
+        int maxTiles[] = new int[26];
 
         private Bag() {
             amountArr[0] = 9;
@@ -50,6 +51,7 @@ public class Tile {
             amountArr[23] = 1;
             amountArr[24] = 2;
             amountArr[25] = 1;
+            maxTiles = amountArr.clone();
             tileArr[0] = new Tile('A', 1);
             tileArr[1] = new Tile('B', 3);
             tileArr[2] = new Tile('C', 3);
@@ -113,14 +115,16 @@ public class Tile {
 
         public void put(Tile t) {
             for (int i = 0; i < 26; i++) {
-                if (tileArr[i].letter == t.letter) {
+                if (tileArr[i].letter == t.letter && amountArr[i] < maxTiles[i]) {
                     amountArr[i]++;
                 }
             }
         }
 
         public int[] getQuantities() {
-            return amountArr;
+            int arr[] = new int[26];
+            arr = amountArr.clone();
+            return arr;
         }
 
         public static Bag getBag() {

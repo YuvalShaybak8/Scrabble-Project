@@ -1,4 +1,4 @@
-//package test;
+package test;
 
 public class Word {
     private Tile tilesArr[] = new Tile[15];
@@ -40,4 +40,5 @@ public class Word {
     public boolean getVertical() {
         return vertical;
     }
+
 }
