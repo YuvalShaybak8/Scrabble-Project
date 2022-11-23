@@ -22,7 +22,7 @@ public class Board {
     }
 
     public Tile[][] getTiles() {
-        Tile copy[][] = boardArr.clone();
+        Tile[][] copy = (Tile[][]) boardArr.clone();
         return copy;
     }
 

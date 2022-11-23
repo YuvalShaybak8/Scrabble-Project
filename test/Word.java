@@ -6,8 +6,8 @@ public class Word {
     private int row;
     private boolean vertical;
 
-    public Word(Tile[] tilesArr, int col, int row, boolean vertical) {
-        this.tilesArr = tilesArr;
+    public Word(Tile[] tileArr, int col, int row, boolean vertical) {
+        this.tilesArr = (Tile[]) tileArr.clone();
         this.col = col;
         this.row = row;
         this.vertical = vertical;
@@ -17,8 +17,11 @@ public class Word {
         if (this.col != other.col || this.row != other.row || this.vertical != other.vertical) {
             return false;
         }
-        for (int i = 0; i < 15; i++) {
-            if (this.tilesArr[i] != other.tilesArr[i]) {
+        if (this.tilesArr.length != other.tilesArr.length) {
+            return false;
+        }
+        for (int i = 0; i < tilesArr.length; i++) {
+            if (!(this.tilesArr[i].equals(other.tilesArr[i]))) {
                 return false;
             }
         }
@@ -26,7 +29,8 @@ public class Word {
     }
 
     public Tile[] getTilesArr() {
-        return tilesArr;
+        Tile[] copy = (Tile[]) tilesArr.clone();
+        return copy;
     }
 
     public int getCol() {
@@ -41,4 +45,7 @@ public class Word {
         return vertical;
     }
 
+    public void setTiles(Tile[] tilesArr) {
+        this.tilesArr = (Tile[]) tilesArr.clone();
+    }
 }

@@ -15,11 +15,16 @@ public class Tile {
         return this.letter == other.letter && this.score == other.score;
     }
 
-    public static int hashCode(Tile t) {
-        if (t == null)
-            return 0;
+    public int hashCode() {
+        return this.letter + this.score;
+    }
 
-        return t.letter * 31 + t.score;
+    public char getLetter() {
+        return this.letter;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public static class Bag {
