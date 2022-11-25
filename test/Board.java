@@ -1,11 +1,11 @@
 package test;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Board {
     private static Tile boardArr[][] = new Tile[15][15];
-    Word wordsArr[] = new Word[15];
-    int wordsCount = 0;
-    static Board gameBoard = null;
+    private Word wordsArr[] = new Word[15];
+    private int wordsCount = 0;
+    private static Board gameBoard = null;
     private String bonus[][] = new String[15][15];
 
     private Board() {
@@ -111,21 +111,18 @@ public class Board {
                     return false;      
             }
             else{
-                for (int i = 0; i < w.getTilesArr().length; i++){
-                    if((ColL-1>-1 && boardArr[RowL+i][ColL-1]!=null) || (RowL+i+1 < 15 && boardArr[RowL+i+1][ColL]!=null) || (RowL+i-1>-1 && boardArr[RowL+i-1][ColL]!=null))
+                for (int i = 0; i < tilesArr.length; i++){
+                    if((ColL-1>-1 && boardArr[RowL+i][ColL-1]!=null) || (RowL+i+1 < 15 && boardArr[RowL+i+1][ColL]!=null) || (RowL+i-1>-1 && boardArr[RowL+i-1][ColL]!=null) || boardArr[RowL+i][ColL]!=null || (ColL+1<15 && boardArr[RowL+i][ColL+1] != null))
                        isLegal = true;
-
-                    if(boardArr[RowL+i][ColL]!=null || (ColL+1<15 && boardArr[RowL+i][ColL+1] != null))
-                        isLegal = true;
 
                     if (boardArr[RowL + i][ColL] != null && boardArr[RowL + i][ColL].getLetter() != tilesArr[i].getLetter())
                         return false;
-            }
+                }
             
-            if(!isLegal)
-                return false;
+                if(!isLegal)
+                   return false;
             }
-        } 
+        }
         else{
         if (ColL + tilesArr.length > 14)
             return false;
@@ -136,11 +133,8 @@ public class Board {
             if (ColL + tilesArr.length < 7 || ColL > 7)
                 return false;
         } else {
-                 for (int i = 0; i < w.getTilesArr().length; i++) {
-                     if ((RowL - 1 > -1 && boardArr[RowL - 1][ColL + i] != null) || (ColL + i + 1 < 15 && boardArr[RowL ][ColL + i + 1] != null) || (ColL + i - 1 > -1 && boardArr[RowL][ColL + i - 1] != null))
-                        isLegal = true;
-
-                     if (boardArr[RowL][ColL+i] != null || (RowL + 1 < 15 && boardArr[RowL + 1][ColL + i] != null))
+                 for (int i = 0; i < tilesArr.length; i++) {
+                     if (boardArr[RowL][ColL+i] != null || (RowL + 1 < 15 && boardArr[RowL + 1][ColL + i] != null) || (RowL - 1 > -1 && boardArr[RowL - 1][ColL + i] != null) || (ColL + i + 1 < 15 && boardArr[RowL ][ColL + i + 1] != null) || (ColL + i - 1 > -1 && boardArr[RowL][ColL + i - 1] != null))
                         isLegal = true;
 
                      if (boardArr[RowL][ColL + i] != null && boardArr[RowL][ColL + i].getLetter() != tilesArr[i].getLetter())
@@ -164,24 +158,24 @@ public class Board {
         int ColW = w.getCol();
         boolean isVertical = w.getVertical();
         Tile[] tiles = w.getTilesArr();
-        int sWord,eWord;
+        int startWord,endWord;
         ArrayList<Tile> tArray = new ArrayList<Tile>();
         words.add(w);
         for (int i = 0; i < tiles.length; i++) {
             if (isVertical) {
-                sWord = ColW;
-                eWord = ColW;
-                while (sWord - 1 > -1 && boardArr[RowW + i][sWord - 1] != null) {
-                    sWord--;
+                startWord = ColW;
+                endWord = ColW;
+                while (startWord - 1 > -1 && boardArr[RowW + i][startWord - 1] != null) {
+                    startWord--;
                 }
-                while (eWord + 1 < 15 && boardArr[RowW + i][eWord + 1] != null) {
-                    eWord++;
+                while (endWord + 1 < 15 && boardArr[RowW + i][endWord + 1] != null) {
+                    endWord++;
                 }
-                if (sWord != ColW || eWord != ColW) {
-                    for (int j = sWord; j <= eWord; j++) {
+                if (startWord != ColW || endWord != ColW) {
+                    for (int j = startWord; j <= endWord; j++) {
                         tArray.add(boardArr[RowW + i][j]);
                     }
-                    Word word = new Word(tArray.toArray(new Tile[tArray.size()]), RowW + i, sWord, false);
+                    Word word = new Word(tArray.toArray(new Tile[tArray.size()]), RowW + i, startWord, false);
                     for (int j = 0; j < wordsCount; j++) {
                         if (wordsArr[j].equals(word)) {
                             word = null;
@@ -192,23 +186,22 @@ public class Board {
                         words.add(word);
                     }
                 }
-
             } else {
-                sWord = RowW;
-                eWord = RowW;
-                while (sWord - 1 > -1 && boardArr[sWord - 1][ColW + i] != null) {
-                    sWord--;
+                startWord = RowW;
+                endWord = RowW;
+                while (startWord - 1 > -1 && boardArr[startWord - 1][ColW + i] != null) {
+                    startWord--;
                 }
-                while (eWord + 1 < 15 && boardArr[eWord + 1][ColW + i] != null) {
-                    eWord++;
+                while (endWord + 1 < 15 && boardArr[endWord + 1][ColW + i] != null) {
+                    endWord++;
                 }
-                if (sWord != RowW || eWord != RowW) {
+                if (startWord != RowW || endWord != RowW) {
                     tArray.clear();
-                    for (int j = sWord; j <= eWord; j++) {
+                    for (int j = startWord; j <= endWord; j++) {
                         tArray.add(boardArr[j][ColW + i]);
                     }
                     if (tArray.size() > 0) {
-                        Word word = new Word(tArray.toArray(new Tile[tArray.size()]), sWord, ColW + i, true);
+                        Word word = new Word(tArray.toArray(new Tile[tArray.size()]), startWord, ColW + i, true);
                         for (int j = 0; j < wordsCount; j++) {
                             if (wordsArr[j].equals(word)) {
                                 word = null;
@@ -237,24 +230,20 @@ public class Board {
         for (int i = 0; i < tiles.length; i++) {
             if (vertical) {
                 if (bonus[row + i][col] == null || bonus[row + i][col].equals("DW") || bonus[row + i][col].equals("TW"))
-                 if(tiles[i] != null)
                     score += tiles[i].getScore();
                 else if (bonus[row + i][col].equals("TL")) {
-                    if (tiles[i] != null)
                        score += tiles[i].getScore() * 3;
-                } else if (bonus[row + i][col].equals("DL")) {
-                    if (tiles[i] != null)
+                } 
+                else if (bonus[row + i][col].equals("DL")) {
                        score += tiles[i].getScore() * 2;
                 }
             } else {
                 if (bonus[row][col + i] == null || bonus[row][col + i].equals("DW") || bonus[row][col + i].equals("TW"))
-                   if(tiles[i] != null)
                       score += tiles[i].getScore();
                 else if (bonus[row][col + i].equals("TL")) {
-                    if (tiles[i] != null)
                       score += tiles[i].getScore() * 3;
-                } else if (bonus[row][col + i].equals("DL")) {
-                    if (tiles[i] != null)
+                } 
+                else if (bonus[row][col + i].equals("DL")) {
                        score += tiles[i].getScore() * 2;
                 }
 
@@ -266,7 +255,8 @@ public class Board {
                     continue;
                 else if (bonus[row + i][col].equals("DW")) {
                     score *= 2;
-                } else if (bonus[row + i][col].equals("TW")) {
+                } 
+                else if (bonus[row + i][col].equals("TW")) {
                     score *= 3;
                 }
             } else {
@@ -274,7 +264,8 @@ public class Board {
                     continue;   
                 else if (bonus[row][col + i].equals("DW")) {
                     score *= 2;
-                } else if (bonus[row][col + i].equals("TW")) {
+                } 
+                else if (bonus[row][col + i].equals("TW")) {
                     score *= 3;
                 }
             }
@@ -282,7 +273,7 @@ public class Board {
         return score;
     }
 
-    public int tryPlaceWord(Word w) {
+    public int tryPlacendWord(Word w) {
         int scoreW = 0;
         int RowP = w.getRow();
         int ColP = w.getCol();
@@ -304,7 +295,7 @@ public class Board {
 
        w.setTiles(tilesW);
         if(boardLegal(w) && dictionaryLegal(w)){
-            this.placeWord(w);
+            this.placendWord(w);
             ArrayList<Word> words = getWords(w);
             for(int i = 0; i < words.size(); i++){
                 if(dictionaryLegal(words.get(i))){
@@ -317,14 +308,14 @@ public class Board {
             for(int i = 0; i < words.size(); i++){
                 wordsArr[wordsCount] = words.get(i);
                 wordsCount++;
-                this.placeWord(words.get(i));
+                this.placendWord(words.get(i));
             }
             return scoreW;
         }
         else{
             return -1;
         }
-     }
+      }
 
     public void placeWord (Word w) {
         int RowP = w.getRow();
@@ -341,5 +332,4 @@ public class Board {
                 
          }
     }
-
 }

@@ -123,9 +123,8 @@ public class Tile {
 
         public void put(Tile t) {
             for (int i = 0; i < 26; i++) {
-                if (tileArr[i].letter == t.letter && amountArr[i] < maxTiles[i]) {
+                if (tileArr[i].letter == t.letter && amountArr[i] < maxTiles[i]) 
                     amountArr[i]++;
-                }
             }
         }
 
