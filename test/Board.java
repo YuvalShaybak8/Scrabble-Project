@@ -273,7 +273,7 @@ public class Board {
         return score;
     }
 
-    public int tryPlacendWord(Word w) {
+    public int tryplaceWord(Word w) {
         int scoreW = 0;
         int RowP = w.getRow();
         int ColP = w.getCol();
@@ -295,7 +295,7 @@ public class Board {
 
        w.setTiles(tilesW);
         if(boardLegal(w) && dictionaryLegal(w)){
-            this.placendWord(w);
+            this.placeWord(w);
             ArrayList<Word> words = getWords(w);
             for(int i = 0; i < words.size(); i++){
                 if(dictionaryLegal(words.get(i))){
@@ -308,7 +308,7 @@ public class Board {
             for(int i = 0; i < words.size(); i++){
                 wordsArr[wordsCount] = words.get(i);
                 wordsCount++;
-                this.placendWord(words.get(i));
+                this.placeWord(words.get(i));
             }
             return scoreW;
         }
