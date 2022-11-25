@@ -219,7 +219,7 @@ public class Board {
     }
 
     public int getScore(Word w) {
-        if (wordsCount > 1) {
+        if (wordsCount > 0) {
             bonus[7][7] = null;
         }
         int score = 0;
@@ -273,7 +273,7 @@ public class Board {
         return score;
     }
 
-    public int tryplaceWord(Word w) {
+    public int tryPlaceWord(Word w) {
         int scoreW = 0;
         int RowP = w.getRow();
         int ColP = w.getCol();
