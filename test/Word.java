@@ -6,7 +6,7 @@ public class Word {
     private int row;
     private boolean vertical;
 
-    public Word(Tile[] tileArr, int col, int row, boolean vertical) {
+    public Word(Tile[] tileArr, int row, int col, boolean vertical) {
         this.tilesArr = (Tile[]) tileArr.clone();
         this.col = col;
         this.row = row;
