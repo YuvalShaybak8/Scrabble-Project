@@ -62,7 +62,7 @@ public class MainTrain {
 		Word w2 = new Word(ts, 6, 7, true);
 		Word w3 = new Word(ts, -1, 7, true);
 		Word w4 = new Word(ts, 7, -1, false);
-		Word w5 = new Word(ts, 0, 7, true);
+		Word w5 = new Word(ts, 0, 7,true);
 		Word w6 = new Word(ts, 7, 0, false);
 
 		if (b.boardLegal(w0) || b.boardLegal(w1) || b.boardLegal(w2) || b.boardLegal(w3) || b.boardLegal(w4)

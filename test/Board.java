@@ -27,32 +27,50 @@ public class Board {
     }
 
     public boolean boardLegal(Word w) {
-        for(int i = 0; i < w.getTilesArr().length; i++) {
-            boolean isLegal = false;
-            // if(w.getTilesArr()[i] 
-            
+        boolean isLegal = false;
+        int counter = 0;
+        if (w.getRow() < 0 || w.getRow() > 14 || w.getCol() < 0 || w.getCol() > 14) {
+            return false;
         }
         if (w.getVertical()) {
-            if (w.getRow() + w.getTilesArr().length > 15) {
+            if (w.getRow() + w.getTilesArr().length > 14)
                 return false;
-            }
-            for (int i = 0; i < w.getTilesArr().length; i++) {
-                if (boardArr[w.getRow() + i][w.getCol()] != null && boardArr[w.getRow() + i][w.getCol()] != w.getTilesArr()[i]) {
-                    return false;
-                }
-            }
 
+            for (int i = 0; i < w.getTilesArr().length; i++) {
+                if (boardArr[w.getRow() + i][w.getCol()] != null
+                        && boardArr[w.getRow() + i][w.getCol()] != w.getTilesArr()[i])
+                    return false;
+
+                if (boardArr[w.getRow() + i][w.getCol()] != null
+                        && boardArr[w.getRow() + i][w.getCol()] == w.getTilesArr()[i])
+                    counter++;
+
+                if (w.getRow() + i == 7 && w.getCol() == 7 && boardArr[7][7] == null)
+                    isLegal = true;
+            }
+            if (counter < w.getTilesArr().length && counter > 0 && boardArr[7][7] != null)
+                isLegal = true;
 
         } else {
-            if (w.getCol() + w.getTilesArr().length > 15) {
+            if (w.getCol() + w.getTilesArr().length > 14)
                 return false;
-            }
+
             for (int i = 0; i < w.getTilesArr().length; i++) {
-                if (boardArr[w.getRow()][w.getCol() + i] != null && boardArr[w.getRow()][w.getCol() + i] != w.getTilesArr()[i]) {
+                if (boardArr[w.getRow()][w.getCol() + i] != null
+                        && boardArr[w.getRow()][w.getCol() + i] != w.getTilesArr()[i])
                     return false;
-                }
+
+                if (boardArr[w.getRow()][w.getCol() + i] != null
+                        && boardArr[w.getRow()][w.getCol() + i] == w.getTilesArr()[i])
+                    counter++;
+
+                if (w.getRow() == 7 && w.getCol() + i == 7 && boardArr[7][7] == null)
+                    isLegal = true;
+
+                if (counter < w.getTilesArr().length && counter > 0 && boardArr[7][7] != null)
+                    isLegal = true;
             }
         }
-        return true;
+        return isLegal;
     }
-}    
+}
