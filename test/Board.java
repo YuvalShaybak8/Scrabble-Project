@@ -6,7 +6,7 @@ public class Board {
     private Word wordsArr[] = new Word[15];
     private int wordsCount = 0;
     private static Board gameBoard = null;
-    private String bonus[][] = new String[15][15];
+    private String bonusArr[][] = new String[15][15];
 
     private Board() {
         for (int i = 0; i < 15; i++) {
@@ -14,67 +14,67 @@ public class Board {
                 boardArr[i][j] = null;
             }
         }
-        bonus[0][0] = "TW";
-        bonus[0][7] = "TW";
-        bonus[0][14] = "TW";
-        bonus[7][0] = "TW";
-        bonus[7][14] = "TW";
-        bonus[14][0] = "TW";
-        bonus[14][7] = "TW";
-        bonus[14][14] = "TW";
-        bonus[1][1] = "DW";
-        bonus[1][13] = "DW";
-        bonus[2][2] = "DW";
-        bonus[2][12] = "DW";
-        bonus[3][3] = "DW";
-        bonus[3][11] = "DW";
-        bonus[4][4] = "DW";
-        bonus[4][10] = "DW";
-        bonus[7][7] = "DW";
-        bonus[10][4] = "DW";
-        bonus[10][10] = "DW";
-        bonus[11][3] = "DW";
-        bonus[11][11] = "DW";
-        bonus[12][2] = "DW";
-        bonus[12][12] = "DW";
-        bonus[13][1] = "DW";
-        bonus[13][13] = "DW";
-        bonus[1][5] = "TL";
-        bonus[1][9] = "TL";
-        bonus[5][1] = "TL";
-        bonus[5][5] = "TL";
-        bonus[5][9] = "TL";
-        bonus[5][13] = "TL";
-        bonus[9][1] = "TL";
-        bonus[9][5] = "TL";
-        bonus[9][9] = "TL";
-        bonus[9][13] = "TL";
-        bonus[13][5] = "TL";
-        bonus[13][9] = "TL";
-        bonus[0][3] = "DL";
-        bonus[0][11] = "DL";
-        bonus[2][6] = "DL";
-        bonus[2][8] = "DL";
-        bonus[3][0] = "DL";
-        bonus[3][7] = "DL";
-        bonus[3][14] = "DL";
-        bonus[6][2] = "DL";
-        bonus[6][6] = "DL";
-        bonus[6][8] = "DL";
-        bonus[6][12] = "DL";
-        bonus[7][3] = "DL";
-        bonus[7][11] = "DL";
-        bonus[8][2] = "DL";
-        bonus[8][6] = "DL";
-        bonus[8][8] = "DL";
-        bonus[8][12] = "DL";
-        bonus[11][0] = "DL";
-        bonus[11][7] = "DL";
-        bonus[11][14] = "DL";
-        bonus[12][6] = "DL";
-        bonus[12][8] = "DL";
-        bonus[14][3] = "DL";
-        bonus[14][11] = "DL";
+        bonusArr[0][0] = "TW";
+        bonusArr[0][7] = "TW";
+        bonusArr[0][14] = "TW";
+        bonusArr[7][0] = "TW";
+        bonusArr[7][14] = "TW";
+        bonusArr[14][0] = "TW";
+        bonusArr[14][7] = "TW";
+        bonusArr[14][14] = "TW";
+        bonusArr[1][1] = "DW";
+        bonusArr[1][13] = "DW";
+        bonusArr[2][2] = "DW";
+        bonusArr[2][12] = "DW";
+        bonusArr[3][3] = "DW";
+        bonusArr[3][11] = "DW";
+        bonusArr[4][4] = "DW";
+        bonusArr[4][10] = "DW";
+        bonusArr[7][7] = "DW";
+        bonusArr[10][4] = "DW";
+        bonusArr[10][10] = "DW";
+        bonusArr[11][3] = "DW";
+        bonusArr[11][11] = "DW";
+        bonusArr[12][2] = "DW";
+        bonusArr[12][12] = "DW";
+        bonusArr[13][1] = "DW";
+        bonusArr[13][13] = "DW";
+        bonusArr[1][5] = "TL";
+        bonusArr[1][9] = "TL";
+        bonusArr[5][1] = "TL";
+        bonusArr[5][5] = "TL";
+        bonusArr[5][9] = "TL";
+        bonusArr[5][13] = "TL";
+        bonusArr[9][1] = "TL";
+        bonusArr[9][5] = "TL";
+        bonusArr[9][9] = "TL";
+        bonusArr[9][13] = "TL";
+        bonusArr[13][5] = "TL";
+        bonusArr[13][9] = "TL";
+        bonusArr[0][3] = "DL";
+        bonusArr[0][11] = "DL";
+        bonusArr[2][6] = "DL";
+        bonusArr[2][8] = "DL";
+        bonusArr[3][0] = "DL";
+        bonusArr[3][7] = "DL";
+        bonusArr[3][14] = "DL";
+        bonusArr[6][2] = "DL";
+        bonusArr[6][6] = "DL";
+        bonusArr[6][8] = "DL";
+        bonusArr[6][12] = "DL";
+        bonusArr[7][3] = "DL";
+        bonusArr[7][11] = "DL";
+        bonusArr[8][2] = "DL";
+        bonusArr[8][6] = "DL";
+        bonusArr[8][8] = "DL";
+        bonusArr[8][12] = "DL";
+        bonusArr[11][0] = "DL";
+        bonusArr[11][7] = "DL";
+        bonusArr[11][14] = "DL";
+        bonusArr[12][6] = "DL";
+        bonusArr[12][8] = "DL";
+        bonusArr[14][3] = "DL";
+        bonusArr[14][11] = "DL";
     }
 
     public static Board getBoard() {
@@ -92,7 +92,7 @@ public class Board {
     public boolean boardLegal(Word w) {
         int RowL = w.getRow();
         int ColL = w.getCol();
-        boolean isLegal = false;
+        boolean legal = false;
         boolean isVertical = w.getVertical();
         Tile[] tilesArr = w.getTilesArr();
 
@@ -113,13 +113,13 @@ public class Board {
             else{
                 for (int i = 0; i < tilesArr.length; i++){
                     if((ColL-1>-1 && boardArr[RowL+i][ColL-1]!=null) || (RowL+i+1 < 15 && boardArr[RowL+i+1][ColL]!=null) || (RowL+i-1>-1 && boardArr[RowL+i-1][ColL]!=null) || boardArr[RowL+i][ColL]!=null || (ColL+1<15 && boardArr[RowL+i][ColL+1] != null))
-                       isLegal = true;
+                       legal = true;
 
                     if (boardArr[RowL + i][ColL] != null && boardArr[RowL + i][ColL].getLetter() != tilesArr[i].getLetter())
                         return false;
                 }
             
-                if(!isLegal)
+                if(!legal)
                    return false;
             }
         }
@@ -135,13 +135,13 @@ public class Board {
         } else {
                  for (int i = 0; i < tilesArr.length; i++) {
                      if (boardArr[RowL][ColL+i] != null || (RowL + 1 < 15 && boardArr[RowL + 1][ColL + i] != null) || (RowL - 1 > -1 && boardArr[RowL - 1][ColL + i] != null) || (ColL + i + 1 < 15 && boardArr[RowL ][ColL + i + 1] != null) || (ColL + i - 1 > -1 && boardArr[RowL][ColL + i - 1] != null))
-                        isLegal = true;
+                        legal = true;
 
                      if (boardArr[RowL][ColL + i] != null && boardArr[RowL][ColL + i].getLetter() != tilesArr[i].getLetter())
                         return false;
                     }
 
-            if (!isLegal)
+            if (!legal)
                 return false;
            }
         }
@@ -220,7 +220,7 @@ public class Board {
 
     public int getScore(Word w) {
         if (wordsCount > 0) {
-            bonus[7][7] = null;
+            bonusArr[7][7] = null;
         }
         int score = 0;
         int col = w.getCol();
@@ -229,21 +229,21 @@ public class Board {
         Tile[] tiles = w.getTilesArr();
         for (int i = 0; i < tiles.length; i++) {
             if (vertical) {
-                if (bonus[row + i][col] == null || bonus[row + i][col].equals("DW") || bonus[row + i][col].equals("TW"))
+                if (bonusArr[row + i][col] == null || bonusArr[row + i][col].equals("DW") || bonusArr[row + i][col].equals("TW"))
                     score += tiles[i].getScore();
-                else if (bonus[row + i][col].equals("TL")) {
+                else if (bonusArr[row + i][col].equals("TL")) {
                        score += tiles[i].getScore() * 3;
                 } 
-                else if (bonus[row + i][col].equals("DL")) {
+                else if (bonusArr[row + i][col].equals("DL")) {
                        score += tiles[i].getScore() * 2;
                 }
             } else {
-                if (bonus[row][col + i] == null || bonus[row][col + i].equals("DW") || bonus[row][col + i].equals("TW"))
+                if (bonusArr[row][col + i] == null || bonusArr[row][col + i].equals("DW") || bonusArr[row][col + i].equals("TW"))
                       score += tiles[i].getScore();
-                else if (bonus[row][col + i].equals("TL")) {
+                else if (bonusArr[row][col + i].equals("TL")) {
                       score += tiles[i].getScore() * 3;
                 } 
-                else if (bonus[row][col + i].equals("DL")) {
+                else if (bonusArr[row][col + i].equals("DL")) {
                        score += tiles[i].getScore() * 2;
                 }
 
@@ -251,21 +251,21 @@ public class Board {
         }
         for (int i = 0; i < tiles.length; i++) {
             if (vertical) {
-                if (bonus[row + i][col] == null)
+                if (bonusArr[row + i][col] == null)
                     continue;
-                else if (bonus[row + i][col].equals("DW")) {
+                else if (bonusArr[row + i][col].equals("DW")) {
                     score *= 2;
                 } 
-                else if (bonus[row + i][col].equals("TW")) {
+                else if (bonusArr[row + i][col].equals("TW")) {
                     score *= 3;
                 }
             } else {
-                if (bonus[row][col + i] == null)
+                if (bonusArr[row][col + i] == null)
                     continue;   
-                else if (bonus[row][col + i].equals("DW")) {
+                else if (bonusArr[row][col + i].equals("DW")) {
                     score *= 2;
                 } 
-                else if (bonus[row][col + i].equals("TW")) {
+                else if (bonusArr[row][col + i].equals("TW")) {
                     score *= 3;
                 }
             }
