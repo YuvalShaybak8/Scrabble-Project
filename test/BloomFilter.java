@@ -3,8 +3,6 @@ package test;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.BitSet;
-import java.util.*;
-import java.io.*;
 
 public class BloomFilter {
     private int size;

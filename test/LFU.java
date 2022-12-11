@@ -1,7 +1,6 @@
 package test;
 
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 
 public class LFU implements CacheReplacementPolicy{
     private LinkedHashMap<String, Integer> map;
