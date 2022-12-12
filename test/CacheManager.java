@@ -7,36 +7,43 @@ public class CacheManager {
     int size;
     CacheReplacementPolicy policy;
     HashSet<String> set = new HashSet<String>();
-    int count;
+    int counter;
 
     public CacheManager(int size, CacheReplacementPolicy policy) {
         this.size = size;
         this.policy = policy;
-        this.count = 0;
+        this.counter = 0;
     }
 
-    public boolean query(String word) {
-        if (set.contains(word)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void add(String word) {
-        if (query(word)) {
+    public void add(String word) 
+    {
+        if (query(word)) 
             policy.add(word);
-        } else {
-            if (count < size) {
+        else 
+        {
+            if (counter < size) 
+            {
                 set.add(word);
                 policy.add(word);
-                count++;
-            } else {
-                String removeWord = policy.remove();
-                set.remove(removeWord);
+                counter++;
+            } 
+            else 
+            {
+                String removeW = policy.remove();
+                set.remove(removeW);
                 set.add(word);
                 policy.add(word);
             }
         }
+    }
+
+    public boolean query(String word) 
+    {
+        if (set.contains(word)) 
+            return true;
+        
+        else 
+            return false;
+
     }
 }

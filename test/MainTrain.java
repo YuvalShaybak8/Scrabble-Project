@@ -3,9 +3,10 @@ package test;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class MainTrain2 {
-
-	public static void testLRU() {
+public class MainTrain 
+{ 
+	public static void testLRU() 
+	{
 		CacheReplacementPolicy lru = new LRU();
 		lru.add("a");
 		lru.add("b");
@@ -16,7 +17,8 @@ public class MainTrain2 {
 			System.out.println("wrong implementation for LRU (-10)");
 	}
 
-	public static void testLFU() {
+	public static void testLFU() 
+	{
 		CacheReplacementPolicy lfu = new LFU();
 		lfu.add("a");
 		lfu.add("b");
@@ -28,7 +30,8 @@ public class MainTrain2 {
 			System.out.println("wrong implementation for LFU (-10)");
 	}
 
-	public static void testCacheManager() {
+	public static void testCacheManager() 
+	{
 		CacheManager exists = new CacheManager(3, new LRU());
 		boolean b = exists.query("a");
 		b |= exists.query("b");
@@ -60,7 +63,8 @@ public class MainTrain2 {
 
 	}
 
-	public static void testBloomFilter() {
+	public static void testBloomFilter() 
+	{
 		BloomFilter bf = new BloomFilter(256, "MD5", "SHA1");
 		String[] words = "the quick brown fox jumps over the lazy dog".split(" ");
 		for (String w : words)

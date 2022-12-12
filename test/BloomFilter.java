@@ -4,66 +4,78 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.BitSet;
 
-public class BloomFilter {
+public class BloomFilter 
+{
     private int size;
-    BitSet bitSet = new BitSet();
-    String [] hashArray;
+    BitSet bitS = new BitSet();
+    String [] hashArr;
 
     public BloomFilter(int size, String ...args){
-        int argsCount = args.length;
         this.size = size;
-        this.hashArray = new String[argsCount];
-        for (int i = 0; i < argsCount; i++) {
-            hashArray[i] = args[i];
+        int counter_args = args.length;
+        this.hashArr = new String[counter_args];
+
+        for (int i = 0; i < counter_args; i++) 
+        {
+            hashArr[i] = args[i];
         }
     }
 
-    public void add(String word){
-        for (String hash: hashArray){
-            try {
-                MessageDigest md = MessageDigest.getInstance(hash);
-                byte [] bytes = md.digest(word.getBytes());
-                BigInteger bigInt = new BigInteger(bytes);
-                int index = bigInt.abs().intValue();
-                if(index < 0){
-                    index = -index;
-                }
-                bitSet.set(index % size);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+    public String toString() 
+    {
+        String res = "";
+        for (int i = 0; i < bitS.length(); i++) 
+        {
+            if (bitS.get(i)) 
+                res += "1";
+            else
+                res += "0";    
         }
+        return res;
     }
 
-    public boolean contains(String word){
-        for (String hash: hashArray){
-            try {
-                MessageDigest md = MessageDigest.getInstance(hash);
-                byte [] bytes = md.digest(word.getBytes());
-                BigInteger bigInt = new BigInteger(bytes);
-                int index = bigInt.abs().intValue();
-                if(index < 0){
-                    index = -index;
-                }
-                if (!bitSet.get(index % size)){
+    public boolean contains(String word) 
+    {
+        for (String hash : hashArr) 
+        {
+            try 
+            {
+                MessageDigest messageD = MessageDigest.getInstance(hash);
+                byte[] bytes = messageD.digest(word.getBytes());
+                BigInteger bigI = new BigInteger(bytes);
+                int ind = bigI.abs().intValue();
+                if (ind < 0) 
+                    ind = -ind;
+
+                if (!bitS.get(ind % size)) 
                     return false;
-                }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 System.out.println(e);
             }
         }
         return true;
     }
 
-    public String toString(){
-        String result = "";
-        for (int i = 0; i < bitSet.length(); i++) {
-            if (bitSet.get(i)){
-                result += "1";
-            } else {
-                result += "0";
+    public void add(String word)
+    {
+        for (String hash: hashArr)
+        {
+            try {
+                MessageDigest messageD = MessageDigest.getInstance(hash);
+                byte [] bytes = messageD.digest(word.getBytes());
+                BigInteger bigI = new BigInteger(bytes);
+                int ind = bigI.abs().intValue();
+                if(ind < 0)
+                    ind = -ind;
+
+                bitS.set(ind % size);
+            } 
+            catch (Exception e) 
+            {
+                System.out.println(e);
             }
         }
-        return result;
     }
 }
