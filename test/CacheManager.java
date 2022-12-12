@@ -2,14 +2,15 @@ package test;
 
 import java.util.HashSet;
 
-public class CacheManager {
- 
+public class CacheManager 
+{ 
     int size;
     CacheReplacementPolicy policy;
     HashSet<String> set = new HashSet<String>();
     int counter;
 
-    public CacheManager(int size, CacheReplacementPolicy policy) {
+    public CacheManager(int size, CacheReplacementPolicy policy)
+    {
         this.size = size;
         this.policy = policy;
         this.counter = 0;
